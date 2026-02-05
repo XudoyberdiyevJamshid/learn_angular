@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Foydalanuvchilar</h1>
+
+  <p *ngIf="isLoading">Yuklanmoqda...</p>
+
+  <ul *ngIf="!isLoading">
+    <li *ngFor="let user of users" class="mt-2">
+      <a [routerLink]="['/httpUser', user.id]" style="cursor: pointer; color: blue">
+        <strong>{{ user.name | uppercase }}</strong>
+      </a>
+      <!-- <button class="px-2 py-1 bg-blue-300">batafsil</button> -->
+    </li>
+  </ul>
+</div>

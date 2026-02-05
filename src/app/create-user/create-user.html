@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Yangi foydalanuvchi qo'shish</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Ism:</label>
+      <input type="text" formControlName="name" class="form-control border outline-none" />
+
+      <div *ngIf="name?.invalid && name?.touched" class="error">
+        <small *ngIf="name?.errors?.['required']">Ism yozish shart!</small>
+        <small *ngIf="name?.errors?.['minlength']">Ism kamida 3 harf bo'lishi kerak.</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" class="form-control border outline-none" />
+
+      <div *ngIf="email?.invalid && email?.touched" class="error">
+        <small *ngIf="email?.errors?.['required']">Email kiritish shart!</small>
+        <small *ngIf="email?.errors?.['email']">Email xato yozildi (misol@mail.ru).</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Web sayt:</label>
+      <input type="text" formControlName="website" class="form-control border outline-none" />
+    </div>
+    <div class="form-group">
+      <label>phone</label>
+      <input type="text" formControlName="phone" class="form-control border outline-none" />
+    </div>
+    <br />
+    <button type="submit" [disabled]="userForm.invalid">Saqlash</button>
+  </form>
+</div>

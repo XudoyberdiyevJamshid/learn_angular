@@ -1,0 +1,6 @@
+<p>Count: {{ count$ | async }}</p>
+<p>Total: {{ total$ | async }} $</p>
+
+<ul>
+  <li *ngFor="let item of cart$ | async">{{ item.name }} - {{ item.price }} $</li>
+</ul>

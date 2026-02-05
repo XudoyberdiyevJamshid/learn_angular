@@ -1,0 +1,16 @@
+<div class="container" *ngIf="user">
+  <h2>{{ user.name | uppercase }} haqida ma'lumot</h2>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Telefon:</strong> {{ user.phone }}</p>
+  <p><strong>Website:</strong> {{ user.website }}</p>
+
+  <p>balance {{ 5000 | currency: 'USD' }}</p>
+  <p>today {{ today | date: 'dd.MM.yyyy' }}</p>
+
+  <p>Formatlangan raqam: {{ '998901234567' | formatphone }}</p>
+
+  <br />
+  <a routerLink="/httpUser" style="cursor: pointer; color: blue">ortga</a>
+</div>
+
+<div *ngIf="!user">Yuklanmoqda...</div>

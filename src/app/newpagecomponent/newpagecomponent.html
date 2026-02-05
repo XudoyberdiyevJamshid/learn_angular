@@ -1,0 +1,18 @@
+<app-header-component></app-header-component>
+header
+<hr />
+<app-checkout-component></app-checkout-component>
+checkout-component
+
+<div class="mt-10 p-6">
+  <input class="border outline-none p-1" type="text" [(ngModel)]="form.name" />
+  <input class="border outline-none p-1" type="number" [(ngModel)]="form.price" />
+  <button class="rounded border bg-green-500 py-2 px-3" (click)="add()">add</button>
+
+  <ul>
+    <li *ngFor="let item of cart$ | async; index as i" class="p-4 bg-slate-400 mb-2 w-52">
+      {{ i + 1 }}. {{ item.name }} - {{ item.price }} $
+      <button class="bg-red-400 py-2 px-3 rounded-md mt-2" (click)="delete(item.id)">delete</button>
+    </li>
+  </ul>
+</div>

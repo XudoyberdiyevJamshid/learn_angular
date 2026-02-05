@@ -1,0 +1,15 @@
+<h3>UsersComponent’da ro‘yxat</h3>
+
+<p *ngIf="userService.loading">Loading...</p>
+<p *ngIf="userService.error">{{ userService.error }}</p>
+
+<div class="wrappper">
+  <ul>
+    <li *ngFor="let u of users$ | async">
+      {{ u.name }} — {{ u.username }}
+
+      <button (click)="goDetails(u.id)">go details</button>
+    </li>
+  </ul>
+  <div><router-outlet></router-outlet></div>
+</div>
