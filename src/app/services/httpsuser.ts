@@ -21,4 +21,8 @@ export class HttpsUserService {
   createUser(user: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, user);
   }
+
+  searchUsers(text: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?q=${text}`);
+  }
 }

@@ -1,14 +1,64 @@
-<div class="container">
-  <h1>Foydalanuvchilar</h1>
+<div class="container" style="padding: 20px">
+  <div
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px"
+  >
+    <h1>Foydalanuvchilar</h1>
+    <button mat-raised-button color="primary" routerLink="/create">
+      <mat-icon>add</mat-icon> Yangi qo'shish
+    </button>
+  </div>
+  <mat-form-field appearance="outline" style="width: 100%; max-width: 400px; font-size: 14px">
+    <mat-label>Qidirish...</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchText"
+      (keyup)="onSearch($event)"
+      placeholder="Ism yozing (masalan: Ali)"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
 
-  <p *ngIf="isLoading">Yuklanmoqda...</p>
+  <div *ngIf="isLoading">Yuklanmoqda...</div>
 
-  <ul *ngIf="!isLoading">
-    <li *ngFor="let user of users" class="mt-2">
-      <a [routerLink]="['/httpUser', user.id]" style="cursor: pointer; color: blue">
-        <strong>{{ user.name | uppercase }}</strong>
-      </a>
-      <!-- <button class="px-2 py-1 bg-blue-300">batafsil</button> -->
-    </li>
-  </ul>
+  <table mat-table [dataSource]="users" class="mat-elevation-z8" *ngIf="!isLoading">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Ism</th>
+      <td mat-cell *matCellDef="let user" style="font-weight: bold">
+        <a [routerLink]="['/httpUser', user.id]" style="color: inherit; text-decoration: none">
+          {{ user.name }}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="website">
+      <th mat-header-cell *matHeaderCellDef>Sayt</th>
+      <td mat-cell *matCellDef="let user">{{ user.website }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Amallar</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button color="primary" [routerLink]="['/httpUser', user.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="onDelete(user.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
